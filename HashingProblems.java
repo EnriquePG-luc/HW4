@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** ENRIQUE PRADO GUTIERREZ / 001 ***
  *
  * This HashingProblems object contains three methods / problems that you must
  * complete utilize the HashMap object within the Java's Collection Framework Library.
@@ -41,7 +41,19 @@ class HashingProblems {
          * returning 0.0/0.0 IS correct (which would return a non-number).
          */
 
-         return 0.0 / 0.0;
+         int sum = 0;
+         int count = 0;
+
+         for (int num : array){
+
+            if (map.containsKey(num)){ //checks if the number exists in the map
+
+                sum += map.get(num);
+                count++;
+            }
+         }
+
+         return count == 0 ? Double.NaN : (double) sum / count;
   }
 
 
@@ -62,6 +74,12 @@ class HashingProblems {
        * Hint: Consider iterating over the HashMap using the keySet method.
        */
 
+       for (int key : map.keySet()){
+        if (key % 2 != 0){ //check if the key is odd
+            result.add(map.get(key));
+        }
+        
+       }
 
       return result;
   }
@@ -110,7 +128,20 @@ class HashingProblems {
        * ADD YOUR CODE HERE
        */
 
-      return -1;
+        HashSet<Integer> set = new HashSet<>();
+        int count = 0;
+
+        for (int num : numbers){
+            if (set.contains(num - k)){
+                count++;
+            }
+            if (set.contains(num + k)){
+                count++;
+            }
+            set.add(num);
+        }
+
+      return count;
   }
 
 } /* end class HashingProblems */

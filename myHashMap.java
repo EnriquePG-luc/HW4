@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** ENRIQUE PRADO GUTIERREZ / 001 ***
  *
  * This hashMap object represents an over simplification of Java's implementation of HashMap within
  * Java's Collection Framework Library. You are to complete the following methods:
@@ -231,6 +231,25 @@ class myHashMap<K,V> {
          * return value is returned the invoking function based on the remove outcome.
          */
 
+         int index = getBucketIndex(key);
+         HashNode<K, V> head = bucket.get(index);
+         HashNode<K, V> prev = null;
+
+         while (head != null){
+            if (head.key.equals(key)){
+                if (prev != null){
+                    prev.next = head.next;
+                }
+                else{
+                    bucket.set(index, head.next);
+                }
+                size --;
+                return head.value;
+            }
+            prev = head;
+            head = head.next;
+         }
+
         return null;
     }
 
@@ -406,7 +425,19 @@ class myHashMap<K,V> {
          * replace (see method's prologue above).
          */
 
-        return val;
+         int index = getBucketIndex(key);
+         HashNode<K, V> head = bucket.get(index);
+
+         while (head != null) {
+            if (head.key.equals(key)){
+                V oldValue = head.value;
+                head.value = val;
+                return oldValue;
+            }
+            head = head.next;
+         }
+
+        return null;
     }
 
     
@@ -433,6 +464,17 @@ class myHashMap<K,V> {
          * This method should apply the precondition (aka, the Key already exists with the
          * value 'oldval', and is so, it SHOULD call replace(K, V) for code reuse.
          */
+
+         int index = getBucketIndex(key);
+         HashNode<K, V> head = bucket.get(index);
+
+         while (head != null){
+            if (head.key.equals(key) && head.value.equals(oldVal)){
+                head.value = newVal;
+                return true;
+            }
+            head = head.next;
+         }
 
         return false;
     }
